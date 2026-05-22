@@ -1,118 +1,145 @@
 :root {
-  --text: #000;
-  --text-h: #000;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --md-primary: #0061a4;
+  --md-primary-dark: #003d82;
+  --md-primary-light: #0077d0;
+  --md-secondary: #0061a4;
+  --md-secondary-dark: #003d82;
+  --md-error: #b3261e;
+  
+  --md-surface: #fffbfe;
+  --md-background: #fffbfe;
+  --md-surface-container: #f7f2f6;
+  
+  --md-on-primary: #ffffff;
+  --md-on-secondary: #ffffff;
+  --md-on-surface: #1c1b1f;
+  --md-on-background: #1c1b1f;
+  
+  --md-text-primary: #1c1b1f;
+  --md-text-secondary: #49454e;
+  --md-text-disabled: #b3b0b5;
+  
+  --md-divider: #ece0eb;
+  --md-border: #e0e0e0;
+  
+  /* Elevation shadows - Material Design 3 */
+  --md-elevation-0: none;
+  --md-elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  --md-elevation-2: 0px 3px 6px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.12);
+  --md-elevation-4: 0px 8px 16px rgba(0, 0, 0, 0.15), 0px 3px 6px rgba(0, 0, 0, 0.12);
+  --md-elevation-8: 0px 16px 24px rgba(0, 0, 0, 0.15), 0px 6px 12px rgba(0, 0, 0, 0.12);
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Typography - Material Design 3 */
+  --md-display-large: 57px;
+  --md-display-medium: 45px;
+  --md-display-small: 36px;
+  --md-headline-large: 32px;
+  --md-headline-medium: 28px;
+  --md-headline-small: 24px;
+  --md-title-large: 22px;
+  --md-title-medium: 16px;
+  --md-title-small: 14px;
+  --md-body-large: 16px;
+  --md-body-medium: 14px;
+  --md-body-small: 12px;
+  --md-label-large: 14px;
+  --md-label-medium: 12px;
+  --md-label-small: 11px;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  --sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --heading: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'Roboto Mono', 'Courier New', monospace;
+
+  font: 14px/1.5 var(--sans);
+  letter-spacing: 0.25px;
+  color-scheme: light;
+  color: var(--md-text-primary);
+  background: var(--md-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #000;
-    --text-h: #000;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+    font: 13px/1.5 var(--sans);
   }
 }
 
 body {
   margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
 }
 
 h1,
 h2 {
   font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--md-text-primary);
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
+  font-size: var(--md-display-small);
+  line-height: 1.2;
+  margin: 32px 0 16px;
   @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+    font-size: var(--md-headline-large);
+    margin: 20px 0 12px;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+h2 {
+  font-size: var(--md-headline-large);
+  line-height: 1.25;
+  margin: 24px 0 12px;
+  @media (max-width: 1024px) {
+    font-size: var(--md-headline-medium);
+  }
+}
+
+h3 {
+  font-size: var(--md-title-large);
+  line-height: 1.3;
+  font-weight: 500;
+  margin: 16px 0 8px;
+}
+
+p {
+  margin: 0;
+  font-size: var(--md-body-medium);
+  color: var(--md-text-primary);
 }
 
 code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  font-family: var(--mono);
+  font-size: var(--md-label-small);
+  line-height: 1.5;
+  padding: 2px 6px;
+  background: var(--md-background);
+  border-radius: 3px;
+  color: var(--md-primary);
 }
 
 .counter {
-  font-size: 16px;
+  font-size: var(--md-body-medium);
   padding: 5px 10px;
   border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
+  color: var(--md-primary);
+  background: var(--md-surface-container);
   border: 2px solid transparent;
   transition: border-color 0.3s;
   margin-bottom: 24px;
 
   &:hover {
-    border-color: var(--accent-border);
+    border-color: var(--md-primary-light);
   }
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--md-primary);
     outline-offset: 2px;
   }
 }
@@ -158,13 +185,8 @@ code {
 
 #app {
   width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
   text-align: left;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
 }
 
@@ -184,7 +206,7 @@ code {
 #next-steps {
   display: flex;
   border-top: 1px solid var(--border);
-  text-align: left;
+  text-align: left;md-divi
 
   & > div {
     flex: 1 1 0;
@@ -207,7 +229,7 @@ code {
 }
 
 #docs {
-  border-right: 1px solid var(--border);
+  border-right: 1px solid var(--md-divider);
 
   @media (max-width: 1024px) {
     border-right: none;
@@ -227,10 +249,10 @@ code {
   }
 
   a {
-    color: var(--text-h);
+    color: var(--md-text-primary);
     font-size: 16px;
     border-radius: 6px;
-    background: var(--social-bg);
+    background: var(--md-surface-container);
     display: flex;
     padding: 6px 12px;
     align-items: center;
@@ -239,7 +261,7 @@ code {
     transition: box-shadow 0.3s;
 
     &:hover {
-      box-shadow: var(--shadow);
+      box-shadow: var(--md-elevation-2);
     }
     .button-icon {
       height: 18px;
@@ -266,10 +288,15 @@ code {
 
 #spacer {
   height: 88px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--md-divider);
   @media (max-width: 1024px) {
     height: 48px;
   }
+}
+
+main {
+  width: 100%;
+  height: 100%;
 }
 
 .ticks {

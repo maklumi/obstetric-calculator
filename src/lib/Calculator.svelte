@@ -206,6 +206,9 @@
   });
 </script>
 
+
+<div id="app">
+
 <div class="card">
   <h3>Calculate Gestational Age. Today {new Date().toLocaleDateString()}</h3>
   <div class="row">
@@ -243,7 +246,7 @@
     </div>
     <div class="field">
       <label for="gestation">Gestation</label>
-      <div id="gestation">
+      <div id="gestation" class="bmi">
         {gestWeeks} week{gestWeeks !== 1 ? "s" : ""}
         {gestRemainingDays} day{gestRemainingDays !== 1 ? "s" : ""}
       </div>
@@ -266,10 +269,8 @@
       />
     </div>
     <div class="field">
-      <div style="font-size:.85rem; color:#000; margin-bottom:.25rem">
-        Occurs on
-      </div>
-      <div>{targetDateLabel}</div>
+      <label for="occursOn">Occurs on</label>
+      <div id="occursOn" class="bmi">{targetDateLabel}</div>
     </div>
   </div>
 
@@ -279,10 +280,8 @@
       <input id="reverseDate" type="date" bind:value={reverseDateStr} />
     </div>
     <div class="field">
-      <div style="font-size:.85rem; color:#000; margin-bottom:.25rem">
-        Gestational age
-      </div>
-      <div>{reverseGestationLabel}</div>
+      <label for="reverseGestation">Gestational age</label>
+      <div id="reverseGestation" class="bmi">{reverseGestationLabel}</div>
     </div>
   </div>
 
@@ -290,7 +289,7 @@
     {#if activeLmp}
       {#each milestones as m}
         <div class="milestone">
-          {m}+0 weeks: {fmt(addDays(activeLmp, m * 7))}
+          {m} weeks: {fmt(addDays(activeLmp, m * 7))}
         </div>
       {/each}
     {/if}
@@ -353,8 +352,8 @@
       <input id="ageDate" type="date" bind:value={ageDateStr} />
     </div>
     <div class="field">
-      <div style="font-size:.85rem; color:#000; margin-bottom:.25rem">Age</div>
-      <div>{ageLabel}</div>
+      <label for="age">Age</label>
+      <div id="age" class="bmi">{ageLabel}</div>
     </div>
   </div>
 </div>
@@ -388,63 +387,202 @@
   {/if}
 </div>
 
+</div>
+
 <style>
-  .card {
-    padding: 1rem;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    max-width: 720px;
-    margin: 1rem auto;
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    gap: 0;
   }
+
+  .card {
+    padding: 24px;
+    background: var(--md-surface);
+    box-shadow: var(--md-elevation-2);
+    border-radius: 4px;
+    margin: 0;
+    border-left: 4px solid var(--md-primary);
+  }
+
+  .card h3 {
+    color: var(--md-primary);
+    margin: 0 0 24px 0;
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--md-divider);
+  }
+
   .row {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
     flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 0;
   }
+
+  .row:last-child {
+    margin-bottom: 0;
+  }
+
   .field {
     flex: 1 1 1;
-    margin: 0.1rem;
+    min-width: auto;
+    margin: 8px 24px 0 0;
+    display: flex;
+    flex-direction: column;
   }
-  h3 {
-    margin: 0 0 0.75rem;
-    font-size: 1.25rem;
-  }
+
   label {
     display: block;
-    font-size: 0.85rem;
-    color: #000;
-    margin-bottom: 0.25rem;
+    font-size: var(--md-label-small);
+    font-weight: 500;
+    color: var(--md-text-secondary);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
   }
+
   input[type="date"],
   input[type="number"] {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
+    width: 80%;
+    padding: 4px;
+    border: 1px solid var(--md-border);
     border-radius: 4px;
+    font-family: var(--sans);
+    font-size: var(--md-body-medium);
+    color: var(--md-text-primary);
+    background: var(--md-surface);
+    transition: all 0.2s ease;
   }
+
+  input[type="date"]:hover,
+  input[type="number"]:hover {
+    border-color: var(--md-primary);
+    box-shadow: var(--md-elevation-1);
+  }
+
+  input[type="date"]:focus,
+  input[type="number"]:focus {
+    outline: none;
+    border-color: var(--md-primary);
+    box-shadow: 0 0 0 3px var(--md-primary-light), var(--md-elevation-2);
+  }
+
+  input[type="date"]::placeholder,
+  input[type="number"]::placeholder {
+    color: var(--md-text-disabled);
+  }
+
   .milestone {
-    padding: 0.25rem 0;
+    padding: 4px;
+    font-size: var(--md-body-medium);
+    color: var(--md-text-primary);
+    border-bottom: 1px solid var(--md-divider);
+    margin: 0;
   }
+
+  .milestone:first-child {
+    padding-top: 0;
+  }
+
+  .milestone:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
   .bmi {
     font-weight: 600;
+    color: var(--md-primary);
+    font-size: 16px;
   }
+
   .bmi-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0.5rem;
+    margin-top: 16px;
+    border: 1px solid var(--md-border);
   }
+
   .bmi-table th,
   .bmi-table td {
-    border: 1px solid #ddd;
-    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--md-divider);
+    padding: 12px 16px;
     text-align: left;
   }
+
   .bmi-table th {
-    background: #f7f7f7;
-    font-weight: 700;
+    background: var(--md-primary-light);
+    color: var(--md-on-primary);
+    font-weight: 600;
+    font-size: var(--md-label-small);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
   }
-  .bmi-table tr:nth-child(even) {
-    background: #fbfbfb;
+
+  .bmi-table td {
+    font-size: var(--md-body-small);
+    color: var(--md-text-primary);
+  }
+
+  .bmi-table tr:nth-child(odd) {
+    background: var(--md-background);
+  }
+
+  .bmi-table tr:hover {
+    background: var(--md-primary-light);
+    color: var(--md-on-primary);
+  }
+
+  /* List styles */
+  ol {
+    margin: 0;
+    padding-left: 24px;
+  }
+
+  li {
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 4px;
+    background: var(--md-background);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--md-label-large);
+    transition: all 0.2s ease;
+  }
+
+  li:hover {
+    background: var(--md-primary-light);
+    color: var(--md-on-primary);
+  }
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    background: var(--md-error);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--md-label-small);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    box-shadow: var(--md-elevation-1);
+  }
+
+  button:hover {
+    box-shadow: var(--md-elevation-4);
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    transform: translateY(0);
+    box-shadow: var(--md-elevation-2);
   }
 </style>
